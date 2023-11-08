@@ -14,11 +14,13 @@ $(document).ready(function () {
     const id = $("#updateId").val();
     const name = $("#updateTitle").val();
     const price = $("#updatePrice").val();
+    const color = $("#updateColor").val();
+    const department = $("#updateDept").val();
     const description = $("#updateDesc").val();
   
     $.ajax({
         url: `https://usman-fake-api.herokuapp.com/api/products/${id}`,
-        data: { name, price, description },
+        data: { name, price, color, department, description },
         method: "PUT",
         success: function (response) {
             loadProduct();
@@ -32,6 +34,8 @@ $(document).ready(function () {
         $("#updateId").val(response._id);
         $("#updateTitle").val(response.name);
         $("#updatePrice").val(response.price);
+        $("#updateColor").val(response.color);
+        $("#updateDept").val(response.department);
         $("#updateDesc").val(response.description);
         $("#updateModal").modal("show");
     });
@@ -39,15 +43,17 @@ $(document).ready(function () {
   
   function addProduct() {
     const name = $("#title").val();
+    const color = $("#color").val();
     const price = $("#price").val();
+    const department = $("#dept").val();
     const description = $("#desc").val();
   
     $.ajax({
         url: "https://usman-fake-api.herokuapp.com/api/products",
         method: "POST",
-        data: { name, price, description },
+        data: { name, price, color, department, description },
         success: function (response) {
-            $("#title, #price, #desc").val("");
+            $("#title, #color, #price, #dept, #desc").val("");
             loadProduct();
             $("#addModal").modal("hide");
         },
